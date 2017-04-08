@@ -30,3 +30,12 @@ This documentation takes you through the process of configuration required to ho
 8. At this point, you have succesfully launched an AWS EC2 instance. Click on **View Instances** to see your newly deployed instance.
 ![aws_step_7](https://github.com/ghoshabhi/cdn/blob/master/AWS_7.png?raw=true "View Instances")
 ![aws_step_8](https://github.com/ghoshabhi/cdn/blob/master/AWS_8.png?raw=true "Dashboard")
+
+# B) SSH into your instance
+
+1. Open a terminal of your choice and type the following command. Replace the `xx.xx.xx.xx` with your Public IP from the dasboard : 
+```sh
+$~ ssh -i ~/path/to/your-pem-file.pem ubuntu@xx.xx.xx.xx 
+```
+If you get an error saying "permission too open", then change the permissions on the file by typing `chmod 400 your-pem-file.pem`. If everything went well you should be able to `ssh` int your server successfully.
+![ssh_1](https://github.com/ghoshabhi/cdn/blob/master/SH_1.png?raw=true "SSH")
