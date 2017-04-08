@@ -6,4 +6,4 @@ This documentation takes you through the process of configuration required to ho
 
 - Open [AWS Console](https://aws.amazon.com/console/)
 - After you signin into your developer account, you should see a list of AWS services like this: 
-[aws_step_1](https://raw.githubusercontent.com/ghoshabhi/cdn/master/AWS_1.png "AWS Dashboard")
+![aws_step_1](https://raw.githubusercontent.com/ghoshabhi/cdn/master/AWS_1.png "AWS Dashboard")
