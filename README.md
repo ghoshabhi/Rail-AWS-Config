@@ -89,3 +89,59 @@ If Ruby was installed correctly, you can check its version by running the follow
 
 ![shell_irb](https://github.com/ghoshabhi/cdn/blob/master/SH_4.png?raw=true "IRB RUBY -V")
 
+## Install bundler
+
+Bundler is a popular tool for managing application gem dependencies. To install run the following command:
+
+```
+$~ >> gem install bundler --no-rdoc --no-ri
+```
+
+## Install NodeJS
+
+Rails uses NodeJS to precompile the asset pipeline. To install Node:
+```
+$~ >> sudo apt-get install -y nodejs &&
+      sudo ln -sf /usr/bin/nodejs /usr/local/bin/node
+```
+![shell_node_install](https://github.com/ghoshabhi/cdn/blob/master/SH_5.png?raw=true "NodeJS")
+
+# D) Install Passenger Web Server
+
+Passenger is an open source web application server for Ruby. It handles HTTP requests, manages processes and resources, and enables administration, monitoring and problem diagnosis. Passenger is very easy to use, makes deploying in production much easier and is scalable.
+
+To install Passenger on your EC2 instance follow the commands below:
+
+1. Install Passenger's PGP Key and add HTTPS support for APT:
+```
+$~ >> sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 &&
+sudo apt-get install -y apt-transport-https ca-certificates
+```
+
+2. Add Passenger's APT repository:
+```
+$~ >> sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main > /etc/apt/sources.list.d/passenger.list' && sudo apt-get update
+```
+3. Install Passenger + Nginx
+```
+$~ >> sudo apt-get install -y nginx-extras passenger
+```
+![shell_passenger_nginx](https://github.com/ghoshabhi/cdn/blob/master/SH_6.png?raw=true "Passenger+Nginx")
+
+4. Now we will enable Passenger Nginx module:
+  - `sudo nano /etc/nginx/nginx.conf`
+  - Uncomment the line in the `http` block by removing the `#` symbol, that says: `# include /etc/nginx/passenger.conf;` 
+  - To save the file press: `Ctrl+O` => Press the enter key => `Ctrl+X`
+  - If you do not see a `http` block, add it yourself:
+  ```
+    http {
+      include /etc/nginx/passenger.conf
+    }
+  ```
+  - ![shell_passenger_conf](https://github.com/ghoshabhi/cdn/blob/master/SH_7.png?raw=true "Passenger Config Enable")
+  -  Finally restart the Nginx service:
+  ```
+  $~ >> sudo service nginx restart
+  ```
+5. If everything went well and Nginx with Passenger was installed correctly, you should see the following page when you visit your EC2 instance's public IP:
+  ![nginx](https://github.com/ghoshabhi/cdn/blob/master/SH_8.png?raw=true "Nginx")
