@@ -145,3 +145,60 @@ $~ >> sudo apt-get install -y nginx-extras passenger
   ```
 5. If everything went well and Nginx with Passenger was installed correctly, you should see the following page when you visit your EC2 instance's public IP:
   ![nginx](https://github.com/ghoshabhi/cdn/blob/master/SH_8.png?raw=true "Nginx")
+
+6. Validate if Passenger was installed or not correctly:
+
+![validate_passenger](https://github.com/ghoshabhi/cdn/blob/master/SH_9.png?raw=true "Validate Passenger")
+
+# E) Deploy App
+
+## Add new user
+
+1. Add new user:
+```
+$~ >> sudo adduser abhi
+```
+![sudo_add_user](https://github.com/ghoshabhi/cdn/blob/master/SH_10.png?raw=true "Add user")
+
+2. Give new user `sudo` permissions:
+```
+$~ >> sudo visudo
+```
+
+A editor will open up, find `root    ALL=(ALL:ALL) ALL` under `User privilege section` and add the following line:
+```
+root    ALL=(ALL:ALL) ALL
+abhi    ALL=(ALL:ALL) ALL
+```
+![adduser](https://github.com/ghoshabhi/cdn/blob/master/SH_11.png?raw=true "Add User")
+
+To save the file press: `Ctrl + O` => Hit enter to save the file name => `Ctrl+Y`
+
+3. Add the new user to `sudo` group:
+![sudo_group](https://github.com/ghoshabhi/cdn/blob/master/SH_12.png?raw=true "Sudo Group")
+
+## Install the public key for new user
+
+1. Issue the following command to get the public key. Copy the output of the command, we will use this in th next step.
+```
+$~ >> cat ~/.ssh/authorized_keys
+```
+
+2. Create a `.ssh` directory and make a file `authorized_keys` there and set correct permissions on them:
+
+![ssh_dir](https://github.com/ghoshabhi/cdn/blob/master/SH_13.png?raw=true "SSH dir")
+
+3. Edit the `~/.ssh/authorized_keys` file by:
+```
+$~ >> nano ~/.ssh/authorized_keys
+```
+
+4. Paste the public key you copied on step 1 here and save the file and exit.
+
+5. Enter `exit` twice to exit out of the server.
+
+6. If everything worked correctly, you should now be able to log in to your server by the new user you created!
+![ssh_new_user](https://github.com/ghoshabhi/cdn/blob/master/SH_14.png?raw=true "SSH new user")
+
+_**Note:** Creating a new user is very important, as the root user doesn't throw any confirmation messages when you run commands - which can be dangerous. The new user has to always use `sudo` which asks for password and saves us from any wrong command being issued._
+
