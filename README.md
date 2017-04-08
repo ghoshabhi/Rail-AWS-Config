@@ -5,5 +5,8 @@ This documentation takes you through the process of configuration required to ho
 # (I) Creating a new AWS EC2 instance
 
 - Open [AWS Console](https://aws.amazon.com/console/)
-- After you signin into your developer account, you should see a list of AWS services like this: 
+- After you signin into your developer account, you should see a list of AWS services. From the the services find **Compute** and select **EC2** from there. 
 ![aws_step_1](https://raw.githubusercontent.com/ghoshabhi/cdn/master/AWS_1.png "AWS Dashboard")
+
+- Select **Launch Instance** from the EC2 dashboard: 
+![aws_step_2](https://github.com/ghoshabhi/cdn/blob/master/AWS_2.png?raw=true "Launch Instance")
