@@ -268,3 +268,41 @@ $~ >> chmod 600 config/database.yml config/secrets.yml
 $~ >> bundle exec rake assets:precompile db:migrate RAILS_ENV=production
 ```
 Output: ![assets_and_migrations](http://g.recordit.co/FMF4uvwGAw.gif)
+
+## Final Steps
+
+1. Determin the ruby command that Passenger should use:
+```
+$~ >> passenger-config about ruby-command
+```
+Please copy the path given for the `Command` variable, for me it looks like this: 
+
+**Command: /usr/local/rvm/gems/ruby-2.4.0/wrappers/ruby**
+
+2. Create a new file `photosite-webapp.conf` under `/etc/nginx/sites-enabled/`:
+```
+$~ >> sudo nano /etc/nginx/sites-enabled/photosit-webapp.conf
+```
+
+3. Add the following `server` block in the file:
+![server_block](https://github.com/ghoshabhi/cdn/blob/master/P5.png?raw=true "Server block")
+
+Please note that, on the line `passenger_ruby` - put whatever you copied on Step 1 of this section and on the line `server_name` put your EC2 instance's public IP or if you have a DNS, put it's name there.
+
+4. Finally, restart the server:
+```
+$~ >> sudo service nginx restart
+```
+
+If everything worked correctly, visit your Public IP of EC2 (for me): `34.208.175.125` - and you should see your app running!
+
+Unfortunately if you faced errors, type the following command to see the error logs:
+```
+$~ >> sudo tail -n 20 /var/log/nginx/error.log
+```
+
+Screenshots from the live app:
+
+![live_app_1](https://github.com/ghoshabhi/cdn/blob/master/App.png?raw=true)
+![live_app_2](https://github.com/ghoshabhi/cdn/blob/master/App2.png?raw=true)
+![live_app_3](https://github.com/ghoshabhi/cdn/blob/master/App3.png?raw=true)
