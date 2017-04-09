@@ -202,3 +202,30 @@ $~ >> nano ~/.ssh/authorized_keys
 
 _**Note:** Creating a new user is very important, as the root user doesn't throw any confirmation messages when you run commands - which can be dangerous. The new user has to always use `sudo` which asks for password and saves us from any wrong command being issued._
 
+## Install Git on server
+
+I have already deployed my project on Github, since it is easier to transfer files from a git server than using FTP, but you may suit yourself.
+
+_**Note:** The commands henceforth are written from the new user account and not the root user, unless otherwise mentioned_
+
+1. Install Git:
+```
+$~ >> sudo apt install -y git
+```
+
+2. Make a new directory under `/var/www` and clone the project there:
+```
+$~ >> sudo mkdir /var/www/photosite-webapp
+$~ >> sudo chown your-new-user-name: /var/www/photosite-webapp
+```
+
+3. Clone your project from github into `/var/www/photosite-webapp` with correct user permissions:
+```
+$~ >> sudo -u your-new-user-name -H git clone https://your-github-project-url
+```
+If everything worked correctly, you should now have your project's code on your server:
+
+![git_setup](https://github.com/ghoshabhi/cdn/blob/master/P1.png?raw=true "Git Project Setup")
+
+## Install project dependencies
+
