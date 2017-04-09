@@ -229,3 +229,42 @@ If everything worked correctly, you should now have your project's code on your 
 
 ## Install project dependencies
 
+1. If you're already not inside your project directory, then go into your project directory:
+```
+$~ >> cd /var/www/photosite-webapp/Project-Name-On-Github
+$~ >> ls
+```
+
+2. Make sure your `Gemfile` has the following `gem sqlite3` outside of all the groups and then run the following commands (`libpq-dev` is used to install native extensions for `pg` gem) : 
+```
+$~ >> sudo apt-get install libpq-dev
+$~ >> bundle install --deployment --without development test
+```
+
+## Configure config/database.yml and config/secrets.yml
+
+1.
+ ```
+ $~ >> sudo nano config/database.yml
+```
+and make sure it looks like: ![database](https://github.com/ghoshabhi/cdn/blob/master/P2.png?raw=true)
+
+2. Rails also needs a unique secret key with which to encrypt its sessions. Starting from Rails 4, this secret key is stored in `config/secrets.yml`. But first, we need to generate a secret key. Run:
+```
+$~ >> bundle exec rake secret
+```
+
+This command will output a secret key, copy that and put it inside `config/secrets.yml`'s `production` section:
+![prod_secret](https://github.com/ghoshabhi/cdn/blob/master/P3.png?raw=true "production secret")
+
+3. Change the security permissions on DB and `secrets.yml` file:
+```
+$~ >> chmod 700 config db
+$~ >> chmod 600 config/database.yml config/secrets.yml
+```
+
+4. Run the following command to precompile assets and run migrations:
+```
+$~ >> bundle exec rake assets:precompile db:migrate RAILS_ENV=production
+```
+Output: ![assets_and_migrations](http://g.recordit.co/FMF4uvwGAw.gif)
