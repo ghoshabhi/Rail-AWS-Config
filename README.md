@@ -304,5 +304,5 @@ $~ >> sudo tail -n 20 /var/log/nginx/error.log
 Screenshots from the live app:
 
 ![live_app_1](https://github.com/ghoshabhi/cdn/blob/master/App.png?raw=true)
-![live_app_2](https://github.com/ghoshabhi/cdn/blob/master/App2.png?raw=true)
 ![live_app_3](https://github.com/ghoshabhi/cdn/blob/master/App3.png?raw=true)
+![live_app_2](https://github.com/ghoshabhi/cdn/blob/master/App2.png?raw=true)
